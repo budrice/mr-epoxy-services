@@ -3,7 +3,7 @@
       <div class="row">
          <div class="col-12 col-md-3">
             <div class="row justify-content-center">
-               <img src="./../assets/images/mr-epoxy.png" alt="logo" class="img-fluid logo">
+               <img :src="require(`../assets/images/${logo}`)" alt="logo" class="img-fluid logo">
             </div>
             <div class="pb-2 row justify-content-center">
                <span class="copyright">&copy;{{ `2019 ${company_name}` }} all rights reserved</span>
@@ -46,15 +46,16 @@ import store from '@/store'
 export default {
    data() {
       return {
-         company_name: store.state.footer.company_name,
-         name: store.state.footer.name,
-         job_title: store.state.footer.job_title,
-         address: store.state.footer.address,
-         city: store.state.footer.city,
-         state: store.state.footer.state,
-         zip: store.state.footer.zip,
-         phone: store.state.footer.phone,
-         link: store.state.footer.link
+         logo: store.state.home.logo,
+         company_name: store.state.contact.company_name,
+         name: store.state.contact.name,
+         job_title: store.state.contact.job_title,
+         address: store.state.contact.address,
+         city: store.state.contact.city,
+         state: store.state.contact.state,
+         zip: store.state.contact.zip,
+         phone: store.state.contact.phone,
+         link: store.state.contact.link
       }
    }
 }

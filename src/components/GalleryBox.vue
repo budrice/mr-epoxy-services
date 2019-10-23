@@ -5,22 +5,24 @@
       </div>
       <div class="vuemodal" :class="{'is-active': isOpen}">
          <div class="vuemodal-content">
-            <div class="vuemodal-content-header">
-               <span class="vuemodal-content-header-title">{{title}}</span>
-               <span class="vuemodal-content-header-close" @click="closeModal" title="close modal">X</span>
+            <div class="vuemodal-content-bar">
+               <span class="vuemodal-content-bar-title">{{title}}</span>
+               <span class="vuemodal-content-bar-close" @click="closeModal" title="close modal">X</span>
             </div>
             <div class="vuemodal-content-view">
-               <div class="row">
-                  <div class="col-12"><img :src="require(`../assets/images/galleries/${expanded}`)" :alt="`${alt}`" class="img-fluid" /></div>
+               <div class="row justify-content-center pad">
+                  <img :src="require(`../assets/images/galleries/${expanded}`)" :alt="`${alt}`" class="expanded img-fluid" />
                </div>
+               <div class="vuemodal-content-bar mid"><span class="vuemodal-content-bar-title">click on an image below</span></div>
                <div class="row pad">
-                  <div class="col-2 no-pad" v-for="image in gallery" :key="image.key">
+                  <div class="col-4 no-pad" v-for="image in gallery" :key="image.key">
                      <div class="app-button" @click.prevent="expanded = image.filename; alt = image.alt">
                         <img :src="require(`../assets/images/galleries/${image.filename}`)" :alt="image.alt" class="img-fluid" />
                      </div>
                   </div>
                </div>
             </div>
+            <div class="vuemodal-content-bar"><span class="vuemodal-content-bar-copy">&copy;2019 Mr Epoxy LLC all rights reserved</span></div>
          </div>
       </div>
    </div>
@@ -73,25 +75,22 @@ $base-bgcolor: rgb(60, 50, 40);
    top: 0;
    width: 100%;
    height: 100%;
-   overflow: auto;
-   background-color: rgba(60, 50, 40, 0.5);
+   overflow: hidden;
+   background-color: rgba(60, 50, 40, 0.75);
    &-content {
       background-color: $base-bgcolor;
-      margin: 12vh auto;
-      padding: 3px;
-      border: 1px solid #000;
-      border-radius: 3px;
-      width: 96%;
+      margin: 100px auto;
       max-width: 600px;
-      box-shadow: 3px 3px 10px #000;
-      &-header {
+      &-bar {
          text-align: center;
          background-image: linear-gradient(rgb(155, 255, 225), rgb(0, 128, 90), rgb(0, 60, 40));
-         border: 1px solid #000;
+         border: 1px solid rgb(0, 60, 40);
          border-top-left-radius: 3px;
          border-top-right-radius: 3px;
          padding: 6px 18px;
-         margin-bottom: 3px;
+         &.mid {
+            padding: 2px 18px !important;
+         }
          &-icon {
             float: left;
          }
@@ -120,11 +119,10 @@ $base-bgcolor: rgb(60, 50, 40);
          }
       }
       &-view {
-         background-color: #fff;
-         min-height: 255px;
+         background-color: rgb(0, 0, 0);
          border-bottom-left-radius: 3px;
          border-bottom-right-radius: 3px;
-         border: 1px solid rgb(60, 50, 40);
+         border: 1px solid rgb(0, 60, 40);
       }
    }
    &.is-active {
@@ -146,5 +144,60 @@ $base-bgcolor: rgb(60, 50, 40);
 .pad {
    padding-left: 15px;
    padding-right: 14px;
+}
+
+@media (max-width: 414px) {
+   .vuemodal-content-title {
+      font-size: 12px;
+   }
+}
+@media (max-width: 768px) {
+   .vuemodal {
+      &-content {
+         margin: 100px auto;
+         border: none;
+         border-radius: 0;
+         width: 100%;
+         box-shadow: none;
+         &-bar {
+            text-align: center;
+            background-image: linear-gradient(rgb(155, 255, 225), rgb(0, 128, 90), rgb(0, 60, 40));
+            border: none;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            padding: 18px;
+            &-title {
+               font-size: 18px;
+            }
+            &-close {
+               margin-top: -10px;
+               background-color: #a00000;
+               border: 1px solid #000099;
+               line-height: 21px;
+               float: right;
+               color: #fff;
+               font-size: 27px;
+               font-weight: 900;
+               padding: 13px 18px;
+               border-radius: 3px;
+               &:hover {
+                  cursor: pointer;
+                  color: #ff8888;
+                  background-color: #ff0000;
+               }
+            }
+         }
+         &-view {
+            background-color: #fff;
+            // min-height: 255px;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border: 1px solid rgb(60, 50, 40);
+         }
+      }
+      &.is-active {
+         display: block;
+      }
+   }
 }
 </style>
