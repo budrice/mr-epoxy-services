@@ -1,4 +1,4 @@
-# mr-epoxy-garage
+# mr-epoxy
 
 ## Project setup
 ```
